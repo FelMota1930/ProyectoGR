@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gomez & Ruiz Asociados | Información Legal</title>
+    <link rel="icon" type="image/png" href="/static/imagenes/icono.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --color-white: #FFFFFF;
+            --color-teal: #5E9188;
+            --color-forest: #3E5954;
+            --color-navy: #253342;
+            --color-dark: #232226;
+        }
+
+        body {
+            background-color: var(--color-white);
+            color: var(--color-dark);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        .bg-teal { background-color: var(--color-teal); }
+        .bg-forest { background-color: var(--color-forest); }
+        .bg-navy { background-color: var(--color-navy); }
+        .bg-dark { background-color: var(--color-dark); }
+        
+        .text-teal { color: var(--color-teal); }
+        .text-forest { color: var(--color-forest); }
+        
+        .nav-link {
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.8);
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--color-teal);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link.active::after, .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active, .nav-link:hover {
+            color: var(--color-teal);
+        }
+
+        .btn-primary {
+            background-color: var(--color-teal);
+            color: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-forest);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(94, 145, 136, 0.3);
+        }
+
+        section {
+            padding: 100px 20px;
+            overflow: hidden;
+        }
+
+        /* Estilos del Mega Menú */
+        .mega-menu {
+            transition: all 0.3s ease-in-out;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+        }
+
+        .mega-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mega-menu-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mega-column-header {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .mega-item {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.875rem;
+            padding: 0.25rem 0;
+            display: block;
+            transition: color 0.2s;
+        }
+
+        .mega-item:hover {
+            color: var(--color-teal);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-teal);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!--sitio oficial-->
+    <div class="bg-[#f0f0f0] border-b border-gray-200 py-1.5 px-4 md:px-10">
+    <div class="max-w-7xl mx-auto flex items-center gap-2">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" 
+             alt="Bandera USA" 
+             class="w-5 h-auto shadow-sm">
+        
+        <p class="text-[11px] md:text-xs text-gray-600 font-medium">
+            Un sitio oficial del Gobierno de Estados Unidos
+        </p>
+    </div>
+    </div>
+
+    <!-- Navegación -->
+    <nav class="bg-dark sticky top-0 w-full z-[100] transition-all duration-300" id="main-nav">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-15 h-12 bg-transparent rounded-lg mr-3 flex items-center justify-center transform rotate-12 hover:rotate-0 transition-transform">
+                        <img src="{{ url_for('static', filename='imagenes/icono.png') }}" 
+                            alt="Logo G&R" 
+                            class="w-full h-full object-contain -rotate-12">
+                    </div>
+                    <a href="/" class="text-white font-bold text-2xl tracking-tighter">GOMEZ & RUIZ<span class="text-teal"> Asociados</span></a>
+                </div>
+                
+                <div class="hidden md:flex space-x-6 items-center">
+                    <div class="relative group">
+                        <button class="nav-link text-sm font-semibold uppercase tracking-wider flex items-center gap-2" data-menu="temas">
+                            Temas <i class="fas fa-chevron-down text-[10px]"></i>
+                        </button>
+                    </div>
+                    <div class="relative group">
+                        <button class="nav-link text-sm font-semibold uppercase tracking-wider flex items-center gap-2" data-menu="servicios-menu">
+                            Formularios <i class="fas fa-chevron-down text-[10px]"></i>
+                        </button>
+                    </div>
+                    <div class="relative group">
+                        <button class="nav-link text-sm font-semibold uppercase tracking-wider flex items-center gap-2" data-menu="Ciudadania">
+                            Ciudadanía <i class="fas fa-chevron-down text-[10px]"></i>
+                        </button>
+                    </div>
+                    <div class="relative group">
+                        <button class="nav-link text-sm font-semibold uppercase tracking-wider flex items-center gap-2" data-menu="Residencia">
+                            Residencia Permanente <i class="fas fa-chevron-down text-[10px]"></i>
+                        </button>
+                    </div>
+                    <div class="relative group">
+                        <button class="nav-link text-sm font-semibold uppercase tracking-wider flex items-center gap-2" data-menu="leyes">
+                            Leyes <i class="fas fa-chevron-down text-[10px]"></i>
+                        </button>
+                    </div>
+                    <a href="/consulta" class="nav-link text-sm font-semibold uppercase tracking-wider">Consulta Abogado</a>
+                </div>
+
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mega Menú: Temas -->
+        <div id="temas" class="mega-menu absolute left-0 w-full bg-navy border-t border-white/5 shadow-2xl z-[-1] overflow-hidden">
+            <div class="max-w-7xl mx-auto px-10 py-12">
+                <h3 class="text-white mega-menu-title">Temas</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                    <div>
+                        <h4 class="mega-column-header">Familia</h4>
+                        <a href="/servicio/familia-usa" class="mega-item">Familiares de Ciudadanos Estadounidenses</a>
+                        <a href="/servicio/familia-refugiados" class="mega-item">Familiares de Refugiados y Asilados</a>
+                        <a href="/servicio/familia-residentes" class="mega-item">Familiares de Residentes Permanentes</a>
+                        <div class="mt-6">
+                            <h4 class="mega-column-header">Adopciones</h4>
+                            <a href="/servicio/adopciones-1" class="mega-item">Antes de Empezar</a>
+                            <a href="/servicio/adopciones-2" class="mega-item">Inmigración por Medio de la Adopción</a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="mega-column-header">Militares</h4>
+                        <a href="/servicio/militares-1" class="mega-item">Ciudadanía para Familiares de Militares</a>
+                        <a href="/servicio/militares-2" class="mega-item">Naturalización por Medio del Servicio Militar</a>
+                    </div>
+                    <div>
+                        <h4 class="mega-column-header">Visite Estados Unidos</h4>
+                        <a href="/servicio/visite-1" class="mega-item">Cambiar su Estatus de No Inmigrante</a>
+                        <a href="/servicio/visite-2" class="mega-item">Extienda su Estadía</a>
+                        <div class="mt-6">
+                            <h4 class="mega-column-header">Trabajar en Estados Unidos</h4>
+                            <a href="/servicio/trabajar-1" class="mega-item">Trabajadores Permanentes</a>
+                            <a href="/servicio/trabajar-2" class="mega-item">Trabajadores Temporales (No Inmigrantes)</a>  
+                            <a href="/servicio/trabajar-3" class="mega-item">Central I-9</a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="mega-column-header">Evite las Estafas de Inmigración</h4>
+                        <a href="/servicio/evite-1" class="mega-item">Encuentre Servicios Legales</a>
+                        <a href="/servicio/evite-2" class="mega-item">Estafas Comunes</a>
+                        <a href="/servicio/evite-3" class="mega-item">Reporte Estafas de Inmigración</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mega Menú: Servicios -->
+        <div id="servicios-menu" class="mega-menu absolute left-0 w-full bg-navy border-t border-white/5 shadow-2xl z-[-1] overflow-hidden">
+            <div class="max-w-7xl mx-auto px-10 py-12">
+                <h3 class="text-white mega-menu-title">Formularios</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                    <div>
+                        <h4 class="mega-column-header">Formularios Más Utilizados</h4>
+                        <a href="/servicio/form-1" class="mega-item">I-9, Verificación de Elegibilidad de Empleo</a>
+                        <a href="/servicio/form-2" class="mega-item">I-485, Solicitud de Registro de Residencia Permanente o Ajustar Estatus</a>
+                        <a href="/servicio/form-3" class="mega-item">I-765, Solicitud de Autorización de Empleo</a>
+                        <a href="/servicio/form-4" class="mega-item">I-90, Solicitud para Reemplazar la Tarjeta de Residente Permanente (Green Card)</a>
+                        <a href="/servicio/form-5" class="mega-item">N-400, Solicitud de Naturalización</a>
+                    </div>
+                    <div>
+                        <h4 class="mega-column-header">Formularios Basados en la Familia</h4>
+                        <a href="/servicio/form-6" class="mega-item">I-129F, Petición de Prometido o Prometida Extranjero(a)</a>
+                        <a href="/servicio/form-7" class="mega-item">I-130, Petición de Familiar Extranjero</a>
+                        <a href="/servicio/form-8" class="mega-item">I-360, Petición para Amerasiático, Viudo(a), o Inmigrante Especial</a>
+                        <a href="/servicio/form-9" class="mega-item">I-600, Petición para Clasificar Huérfano como Familiar Inmediato</a>
+                        <a href="/servicio/form-10" class="mega-item">I-751, Petición para Cancelar las Condiciones de Residencia</a>
+                    </div>
+                    <div>
+                        <h4 class="mega-column-header">Formularios Basados en el Empleo</h4>
+                        <a href="/servicio/form-11" class="mega-item">I-140, Petición de Trabajador Inmigrante Extranjero</a>
+                        <a href="/servicio/form-12" class="mega-item">I-526, Petición de Inmigrante por Inversionista Independiente</a>
+                        <a href="/servicio/form-13" class="mega-item">I-539, Solicitud de Extensión o Cambio de Estatus de No Inmigrante</a>
+                    </div>
+                    <div>
+                        <h4 class="mega-column-header">Formularios Basados en Asuntos Humanitarios</h4>
+                        <a href="/servicio/form-14" class="mega-item">I-589, Solicitud de Asilo y de Suspensión de Remoción</a>
+                        <a href="/servicio/form-15" class="mega-item">I-730, Petición de Familiar Refugiado/Asilado</a>
+                        <a href="/servicio/form-16" class="mega-item">I-821, Solicitud de Estatus de Protección Temporal</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mega Menú: Ciudadania -->
+        <div id="Ciudadania" class="mega-menu absolute left-0 w-full bg-navy border-t border-white/5 shadow-2xl z-[-1] overflow-hidden">
+            <div class="max-w-7xl mx-auto px-10 py-12">
+                <h3 class="text-white mega-menu-title">Ciudadanía</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                    <div>
+                        <h4 class="mega-column-header">Aprendices</h4>
+                        <a href="/servicio/ciudadania-1" class="mega-item">Solicite la Ciudadanía</a>
+                        <a href="/servicio/ciudadania-2" class="mega-item">Aprenda sobre Ciudadanía</a>
+                    </div>
+                    <div>
+                        <h4 class="mega-column-header">Educadores</h4>
+                        <a href="/servicio/ciudadania-3" class="mega-item">Materiales Educativos para Educadores y Administradores de Programas</a>
+                        <a href="/servicio/ciudadania-4" class="mega-item">Próximas Capacitaciones para Maestros</a>
+                        <a href="/servicio/ciudadania-5" class="mega-item">Recursos para Programas Educativos</a>
+                    </div>
+                    <div>
+                        <h4 class="mega-column-header">Organizaciones</h4>
+                        <a href="/servicio/ciudadania-6" class="mega-item">Herramientas de Enlace Comunitario</a>
+                        <a href="/servicio/ciudadania-7" class="mega-item">Datos y Estadísticas Relacionadas con la Naturalización</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <!-- Mega Menú: residencia -->
+        <div id="Residencia" class="mega-menu absolute left-0 w-full bg-navy border-t border-white/5 shadow-2xl z-[-1] overflow-hidden">
+            <div class="max-w-7xl mx-auto px-10 py-12">
+                <h3 class="text-white mega-menu-title">Residencia Permanente</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div>
+                        <h4 class="mega-column-header">Procesos y Procedimientos para la Residencia Permanente</h4>
+                        <a href="/servicio/residencia-1" class="mega-item">Ajuste de Estatus</a>
+                        <a href="/servicio/residencia-2" class="mega-item">Después de que le Otorgamos la Tarjeta de Residencia Permanente</a>
+                        <a href="/servicio/residencia-3" class="mega-item">Disponibilidad de Visas y Fechas de Prioridad</a>
+                        <a href="/servicio/residencia-4" class="mega-item">Documento de Autorización de Empleo</a>
+                    </div>
+                    <div>
+                        <h4 class="mega-column-header">
+                            <a href="/servicio/residencia-5" class="hover:text-teal transition-colors">Categorías de Elegibilidad a la Residencia Permanente</a>
+                        </h4>
+                        <h4 class="mega-column-header">
+                            <a href="/servicio/residencia-6" class="hover:text-teal transition-colors">CÓMO SOLICITAR LA TARJETA DE RESIDENTE PERMANENTE</a>
+                        </h4>
+                        <h4 class="mega-column-header">
+                            <a href="/servicio/residencia-7" class="hover:text-teal transition-colors">MIENTRAS SU RESIDENCIA PERMANENTE ESTÁ EN TRÁMITE CON USCIS</a>
+                        </h4>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mega Menú: leyes -->
+        <div id="leyes" class="mega-menu absolute left-0 w-full bg-navy border-t border-white/5 shadow-2xl z-[-1] overflow-hidden">
+            <div class="max-w-7xl mx-auto px-10 py-12">
+                <h3 class="text-white mega-menu-title">Leyes</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div>
+                        <h4 class="mega-column-header">Legislación</h4>
+                        <a href="/servicio/leyes-1" class="mega-item">Ley de Inmigración y Nacionalidad</a>
+                        <div class="mt-6">
+                        <h4 class="mega-column-header">
+                           <a href="/servicio/leyes-2" class="hover:text-teal transition-colors">Presencia Ilegal e Inadmisibilidad</a>
+                        </h4>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="mega-column-header">
+                           <a href="/servicio/leyes-3" class="hover:text-teal transition-colors">Reglamentos</a>
+                        </h4>
+                        <h4 class="mega-column-header">
+                           <a href="/servicio/leyes-4" class="hover:text-teal transition-colors">Apelaciones Administrativas</a>
+                        </h4>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menú Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-navy border-t border-white/10 px-6 py-8 space-y-4 shadow-2xl animate-fade-in-down">
+            <a href="#inicio" class="block text-white text-lg font-medium">Inicio</a>
+            <a href="#servicios" class="block text-white text-lg font-medium">Servicios</a>
+            <a href="#portafolio" class="block text-white text-lg font-medium">Proyectos</a>
+            <a href="#contacto" class="block text-white text-lg font-medium">Contacto</a>
+        </div>
+    </nav>
+
+    <main>
+        <section id="hero-dinamico" class="bg-navy min-h-[60vh] flex items-center justify-center relative pt-20">
+            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, #5E9188 1px, transparent 0); background-size: 40px 40px;"></div>
+            <div class="max-w-5xl text-center z-10 px-4" data-aos="fade-up">
+                <span id="txt-categoria" class="inline-block py-1 px-4 rounded-full bg-teal/20 text-teal font-bold text-xs uppercase tracking-widest mb-6">Trámite</span>
+                <h1 id="txt-titulo" class="text-4xl md:text-7xl font-black text-white mb-8 leading-tight">Cargando...</h1>
+                <div class="w-24 h-1.5 bg-teal mx-auto"></div>
+            </div>
+        </section>
+
+        <section class="bg-white py-20 relative z-20 -mt-10">
+            <div class="max-w-4xl mx-auto px-6">
+                <div class="bg-white p-10 md:p-16 rounded-[40px] shadow-2xl border border-gray-100" data-aos="fade-up">
+                    <div id="txt-contenido" class="prose prose-lg max-w-none text-gray-600 leading-relaxed space-y-6">
+                        </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark py-12 text-center text-white/30 text-xs tracking-widest uppercase">
+        &copy; 2026 Gómez & Ruiz Asociados. Todos los derechos reservados.
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // 1. BASE DE DATOS DE LOS 48 SERVICIOS
+        const dataLegal = {
+            "familia-usa": {
+                cat: "Familia",
+                tit: "Familiares de <br> Ciudadanos <span class='text-teal'>Estadounidenses</span>",
+                cuerpo: "<p>Esta página describe cómo usted, como ciudadano de Estados Unidos, puede presentar una petición para que ciertos miembros de su familia reciban una Tarjeta de Residencia Permanente (conocida también como Tarjeta Verde o Green Card), una visa de prometido(a) o una visa K-3 o K-4 a base de su relación familiar. Si su familiar desea naturalizarse u obtener prueba de su ciudadanía, vea la sección Ciudadanía de nuestro sitio web.</p>"
+            },
+            "familia-refugiados": {
+                cat: "Familia",
+                tit: "Familiares de <br> <span class='text-teal'>Refugiados y Asilados</span>",
+                cuerpo: "<p>Si usted entró a los Estados Unidos como refugiado en los últimos 2 años o se le concedió el estatus de asilado en los últimos 2 años, usted puede solicitar que ciertos familiares obtengan el estatus de refugiado o asilado derivado. Si usted todavía no ha solicitado o no se le ha concedido estatus de refugiado o asilado, por favor, vea el enlace Refugiados y Asilados.</p><p><strong>Usted Puede Solicitar la Entrada a Estados Unidos de los Siguientes Familiares:</strong></p><ul><li>• Cónyuges</li><li>• Hijos (solteros y menores de 21 años al momento en que inicialmente usted solicitó el estatus de asilado o refugiado)</li></ul>"
+            },
+            "familia-residentes": {
+                cat: "Familia",
+               tit: "Familiares de <br> <span class='text-teal'>Residentes Permanentes</span>",
+                cuerpo: "<p>Como residente permanente (persona con la Tarjeta Verde) usted puede presentar una solicitud para que ciertos familiares inmigren a Estados Unidos en calidad de Residentes Permanentes.</p><p><strong>Usted puede peticionar a los familiares siguientes:</strong></p><ul><li>• Cónyuge (esposo/a)</li><li>• Hijos solteros menores de 21 años</li><li>• Hijo/a soltero de cualquier edad</li></ul>"
+            },
+            "adopciones-1": {
+                cat: "Adopciones",
+                tit: "Antes de <br> <span class='text-teal'>Empezar</span>",
+                cuerpo: "<p>Le exhortamos a familiarizarse con cada proceso de adopción, ya que existen diferencias significativas entre cada uno de ellos. Una agencia de adopción podrá ayudarle a gestionar un proceso de adopción, pero no puede representarle ante USCIS ni asesorarle sobre los aspectos legales de la inmigración de su hijo. Si busca representación legal para los procedimientos de adopción, considere contactar a un abogado.</p><p><strong>Leyes</strong></p><p>Las adopciones internacionales están regidas por tres conjuntos de leyes diferentes:</p><ul><li>• La ley federal estadounidense</li><li>• Las leyes del país de origen del menor</li><li>• Las leyes de su lugar de residencia (estado / territorio de Estados Unidos o país extranjero).</li></ul><p><strong>Procesos</strong></p><p>Hay tres tipos diferentes de procesos para que su hijo adoptivo inmigre:</p><ul><li>• Adopciones bajo el Convenio de La Haya</li><li>• Adopciones de huérfanos (fuera del Convenio de La Haya)</li><li>• Inmigrar otros hijos adoptivos</li></ul><p><strong>Estudios del hogar</strong></p><p>Los estudios del hogar son sumamente importantes en el proceso de las adopciones internacionales. Visite la página de Información sobre el estudio del hogar, para conocer:</p><ul><li>• ¿Qué es un estudio del hogar?</li><li>• ¿Quién lo lleva a cabo?</li><li>• ¿Cuáles son los requisitos para los estudios del hogar?</li></ul><p><strong>Cuándo contactarnos</strong></p><p>Estamos comprometidos en decidir los casos a la brevedad posible. Para más información acerca de cuánto tiempo pudiera demorarse su caso, por favor visite la página Tiempos de Procesamiento. Si no se ha tomado una determinación sobre su caso dentro del tiempo usual de trámite, puede contactarnos a través de nuestra página Información de Contacto sobre Adopciones de USCIS.</p><p><strong>Luego de la adopción</strong></p><p>El proceso no culmina con la adopción. Asegúrese de entender los requisitos de ciudadanía y cómo obtener los documentos relacionados a ello. Para más información visite la página “Después de que su hijo ingresa a Estados Unidos”.</p>"
+            },
+            "adopciones-2": {
+                cat: "Adopciones",
+                tit: "Inmigración por Medio <br> <span class='text-teal'>de la Adopción</span>",
+                cuerpo: "<p>La inmigración por medio de la adopción, o \"adopción internacional,\" se refiere a la adopción de un niño nacido en un país por un padre adoptivo que vive en otro país. El Servicio de Ciudadanía e Inmigración desempeña una función clave en el proceso de adopción internacional.<br></p><p>La ley de inmigración de Estados Unidos establece tres procesos distintos por medio de los cuales las personas pueden inmigrar basándose en una adopción internacional. Una persona puede inmigrar bajo una de estas estipulaciones solamente si la adopción de esa persona satisface todos los requisitos de ese proceso específico.<br></p><p>Hay dos procesos distintos que aplican solamente a los menores adoptados por ciudadanos estadounidenses. El niño puede inmigrar inmediatamente después de la adopción o puede inmigrar a EE.UU. para que se le adopte aquí.<br></p><ul><li>• El proceso de La Haya: si menor reside habitualmente en un país que es una de las partes del Convenio de Adopción Internacional de La Haya.<br></li><li>• El proceso de huérfanos (no de La Haya): si no aplica el Convenio de Adopción Internacional de La Haya.<br></li></ul><p>Muchos de los aspectos y requisitos de La Haya y del proceso de huérfanos son parecidos. Para obtener los detalles de estos procesos de adopción, vea los enlaces al proceso específico bajo \"Inmigración por medio de la adopción\".<br></p><p>Hay otro proceso que le aplica a un ciudadano o residente permanente de EE.UU. que puede presentar una petición para que su hijo adoptivo sea clasificado como familiar inmediato. Vea el enlace de \"Otros tipos de inmigración relacionada con la adopción\".</p>"
+            },
+            "militares-1": {
+                cat: "militares",
+                tit: "Ciudadanía para <br> <span class='text-teal'>Familiares de Militares</span>",
+                cuerpo: "<p>Los cónyuges de miembros del servicio militar de Estados Unidos pueden ser elegibles para obtener la ciudadanía de forma expedita desde fuera de Estados Unidos. Los (las) hijos(as) de militares también pueden ser elegibles para la naturalización o para adquirir automáticamente la ciudadanía.<br></p><p>Para información acerca de los requisitos y procedimientos para cónyuges de ciudadanos estadounidenses que no cualifican para obtener la ciudadanía expedita desde el extranjero, vea el enlace Ciudadanía de nuestra página web. Para información general acerca de la ciudadanía adquirida o derivada a través de los padres para hijos de militares, visite nuestra página Ciudadanía a Través de los Padres. Para obtener información sobre ciudadanía para hijos adoptados de miembros del servicio militar, visite nuestra página web sobre ciudadanía estadounidense para un hijo adoptado.<br></p><p>Para información acerca de la ciudadanía para los cónyuges o hijos sobrevivientes de militares que murieron como resultado de una lesión o enfermedad ocurrida mientras estaban en servicio militar, vea la página Ciudadanía para Sobrevivientes de Militares Estadounidenses Basados en la Familia.</p>"
+            },
+            "militares-2": {
+                cat: "militares",
+                tit: "Naturalización por Medio <br> <span class='text-teal'>del Servicio Militar</span>",
+                cuerpo: "<p>Si usted sirve o ha servido en las Fuerzas Armadas de Estados Unidos y le interesa convertirse en un ciudadano estadounidense, puede ser elegible a solicitar la naturalización bajo ciertas disposiciones especiales de la Ley de Inmigración y Nacionalidad (INA).</p>"
+            },
+           "visite-1": {
+                cat: "VISITE ESTADOS UNIDOS",
+                tit: "Cambiar su Estatus <br> <span class='text-teal'>de No Inmigrante</span>",
+                cuerpo: "<p>Si usted desea cambiar el propósito de su visita mientras está en Estados Unidos, usted (o en algunos casos, su empleador) debe presentar una solicitud a USCIS mediante el formulario apropiado antes de que caduque la autorización de su estadía. Por ejemplo, si usted llegó aquí como turista, pero desea convertirse en estudiante, debe presentar una solicitud para cambiar su estatus. Le recomendamos que presente la solicitud tan pronto determine que necesita cambiar a una categoría diferente de no inmigrante.<br></p><p>Hasta que usted reciba la aprobación de USCIS, no dé por sentado que el cambio de estatus ha sido aprobado, y no cambie su actividad en Estados Unidos. Por ejemplo, si en la actualidad usted es un turista no inmigrante, no empiece a asistir a clases como estudiante hasta que haya recibido la autorización de USCIS para cambiar su estatus. Si usted no mantiene su estatus de no inmigrante, puede que se le prohíba regresar a Estados Unidos y/o puede ser removido (deportado) de Estados Unidos. Su estatus autorizado y la fecha en que caduca su estatus se encuentran en la parte inferior derecha de su Formulario I-94, Registro de Entrada/Salida de No Inmigrante.<br></p><p>En general, usted puede solicitar un cambio de su estatus de no inmigrante si fue admitido legalmente en Estados Unidos con una visa de no inmigrante, si su estatus de no inmigrante sigue siendo válido, no ha violado las condiciones de su estatus, y no ha cometido ningún delito que lo haga inelegible.<br></p><p>Usted no necesita solicitar un cambio de su estatus de no inmigrante si fue admitido en Estados Unidos por razones de negocios (visa categoría B-1) y desea permanecer en Estados Unidos por razones de placer antes de que caduque su estadía autorizada.<br></p><p>Usted no necesita solicitar un cambio de su estatus de no inmigrante si desea estudiar en Estados Unidos y es el cónyuge o hijo de alguien que está admitido legalmente en Estados Unidos en alguna de las categorías de visa para no inmigrante siguientes:<br></p><ul><li>• Diplomáticos y otros funcionarios de gobierno, y empleados (visa categoría A)</li><li>• Comerciantes e inversionistas internacionales (visa E)</li><li>• Representantes de organizaciones internacionales y sus empleados (visa G)</li><li>• Trabajadores temporales (visa H)</li><li>• Representantes de los medios de comunicación extranjeros (visa I)</li><li>• Visitantes de intercambio (visa J)</li><li>• Empleados transferidos dentro de una misma empresa (visa L)</li></ul><p>Estudiantes académicos (visa F) o vocacionales (visa M) (puede asistir únicamente a clases en escuela primaria, secundaria o preparatoria. Si desea asistir a clases universitarias a tiempo completo debe solicitar un cambio de estatus). Usted no puede solicitar un cambio de su estatus de no inmigrante si fue admitido en Estados Unidos bajo las siguientes categorías (a menos que esté solicitando el estatus T de no inmigrante o solicitando el estatus U de no inmigrante):<br></p><ul><li>• Programa de exención de visa</li><li>• Miembro de una tripulación (visa D de no inmigrante)</li><li>• En tránsito por Estados Unidos (visa C de no inmigrante)</li><li>• Prometido de un ciudadano estadounidense o dependiente de un prometido (visa K de no inmigrante)</li><li>• Informante (y familiares acompañantes) de terrorismo o crimen organizado (visa S de no inmigrante)</li></ul><p>Si usted es un <strong>estudiante vocacional (M-1)</strong>, no puede solicitar cambiar su estatus al de:<br></p><ul><li>• Estudiante académico (F-1)</li><li>• Cualquier estatus H (trabajador temporal), si la formación que usted recibió como estudiante vocacional en Estados Unidos le facilitó que cualificara para la posición de trabajador temporal que usted desea.</li></ul><p>Si usted es un <strong>visitante de intercambio internacional (J-1)</strong>, (a menos que esté solicitando el estatus T de no inmigrante o solicitando el estatus U de no inmigrante), no puede cambiar su estatus de no inmigrante si:<br></p><ul><li>• Fue admitido en Estados Unidos para recibir capacitación como médico graduado, a menos que reciba una exención especial.</li><li>• Usted es un visitante de intercambio y debe cumplir con los requisitos de residencia en el extranjero, a menos que reciba una exención.</li><li>• Si usted no recibe una exención, sólo puede solicitar cambiar a la categoría de diplomático y otros funcionarios de gobierno (visa A) o de representantes de organizaciones internacionales (visa G).</li></ul><p>Tenga en cuenta que, si está solicitando el estatus T de no inmigrante, debe presentar un Formulario I-914, Solicitud de Estatus T de No Inmigrante. Si está solicitando el estatus U de no inmigrante, debe presentar un Formulario I-918, Petición de Estatus U de No Inmigrante. No puede solicitar cambiar su estatus a no inmigrante T o U utilizando el Formulario I-539, Solicitud para Extender o Cambiar el Estatus de No Inmigrante, si tiene alguno de los estatus de no inmigrante mencionados anteriormente.</p>"
+            },
+            "visite-2": {
+                cat: "VISITE ESTADOS UNIDOS",
+                tit: "Extienda su <br> <span class='text-teal'>Estadía</span>",
+                cuerpo: "<p>Por lo general, se solicita una extensión de estadía (EOS) mediante el Formulario I-129, Petición para un Trabajador No Inmigrante, o un Formulario I-539, Solicitud de Extensión o Cambio de Estatus de No Inmigrante, dependiendo de la clasificación de no inmigrante que el peticionario o solicitante desea extender. Las instrucciones del Formulario I-539 y el Formulario I-129 proporcionan información detallada sobre quién puede presentar cada formulario. También se puede presentar información suplementaria para la Solicitud de Extensión o Cambio de Estatus de No Inmigrante (Formulario I-539A) o una Petición para un Trabajador Transicional No Inmigrante -Solo CNMI (Formulario I-129CW), cuando corresponda. Si usted permanece en Estados Unidos por más tiempo de lo autorizado, es posible que se le prohíba regresar y/o que sea removido (deportado) de Estados Unidos. Verifique la fecha indicada la esquina inferior derecha de su Formulario I-94, Registro de Entrada-Salida, para determinar la fecha de vencimiento de su estadía autorizada. Le recomendamos que solicite extender su estadía por lo menos 45 días antes de que venza su estadía autorizada.<br></p><p>Puede solicitar extender su estadía si:<br></p><ul><li>• Fue admitido legalmente en Estados Unidos con una visa de no inmigrante;</li><li>• Su estatus de visa de no inmigrante sigue siendo válido;</li><li>• No ha cometido ningún delito que lo haga inelegible para una visa;</li><li>• No ha violado las condiciones de su admisión; y</li><li>• Su pasaporte es válido y seguirá siendo válido durante la duración de su estancia</li></ul><p>No puede presentar una solicitud para extender su estadía si fue admitido en Estados Unidos en las siguientes categorías:<br></p><ul><li>• Programa de Exención de Visa;</li><li>• Miembro de Tripulación (visa de no inmigrante D);</li><li>• En tránsito a través de Estados Unidos (visa de no inmigrante C);</li><li>• En tránsito por Estados Unidos sin visa (TWOV);</li><li>• Prometido(a) de un ciudadano estadounidense o dependiente de un(a) prometido(a) (visa de no inmigrante K); o</li><li>• Informante (y familiares acompañantes) sobre terrorismo o crimen organizado (visa de no inmigrante S)</li></ul>"
+            },
+           "trabajar-1": {
+                cat: "TRABAJAR EN ESTADOS UNIDOS",
+                tit: "Trabajadores <br> <span class='text-teal'>Permanentes</span>",
+                cuerpo: "<p><strong>Visas Basadas en el Empleo</strong><br>Cada año fiscal hay aproximadamente 140,000 visas de inmigrantes para extranjeros (y sus cónyuges e hijos) que tengan la intención de inmigrar basándose en sus destrezas laborales. Estas visas de inmigrante basadas en el empleo se distribuyen en cinco categorías de preferencia que se resumen en la tabla a continuación. Si usted tiene la combinación adecuada de destrezas, educación y/o experiencia laboral y es elegible teniendo en cuenta otros aspectos, usted podría vivir permanentemente en Estados Unidos.<br></p><p>Algunas categorías de preferencia de visa de inmigrante requieren que usted tenga una oferta de trabajo permanente de un empleador estadounidense. Este empleador será considerado su patrocinador/peticionario y presentará una petición de inmigrante ante USCIS en su nombre. Si no se requiere una oferta de trabajo, puede presentar una petición en su propio nombre.<br></p><p>Para obtener más información, consulte las preguntas frecuentes sobre el ajuste de estatus basado en el empleo.<br></p><p><strong>Certificación de Condición Laboral</strong><br>En el caso de las categorías de segunda y tercera preferencia, antes de que el empleador estadounidense pueda presentar una petición de inmigrante ante USCIS, el empleador generalmente tiene que obtener una certificación de condición laboral aprobada por el Departamento del Trabajo de Estados Unidos (DOL). La certificación de condición laboral del DOL corrobora lo siguiente:<br></p><ul><li>• No hay suficientes trabajadores estadounidenses disponibles, cualificados, capaces y dispuestos para ocupar la posición que se ofrece con la tasa salarial prevaleciente o una tasa mayor; y</li><li>• Contratar a un trabajador extranjero no incidirá de manera negativa en los salarios y las condiciones de empleo de los trabajadores estadounidenses con empleos similares.</li></ul><p>En estos casos, la petición de inmigrante debe incluir un Formulario ETA-9089, Solicitud de Certificación de Empleo Permanente, aprobado por DOL, o una solicitud de certificación de condición laboral presentada en o después del 1 de junio de 2023, a través del Portal de Solicitud de Mano de Obra Extranjera (FLAG) de DOL, y un Formulario ETA-9089, Determinación Final – Aprobación de Certificación de Empleo Permanente (Determinación Final) aprobado y firmado.<br></p><p>Para ciertas ocupaciones conocidas como las ocupaciones del Anejo A (conocida también como Lista A) no se requiere una certificación de condición laboral aprobada por DOL. Esto se debe a que DOL ya ha determinado que no hay trabajadores estadounidenses suficientes para dichas ocupaciones. Actualmente, DOL ha designado dos grupos de ocupaciones bajo el Anejo A. El Grupo I incluye a las enfermeras profesionales y terapistas físicos. El Grupo II incluye a los beneficiarios con habilidades extraordinarias en las ciencias o artes (incluidos los profesores de institutos de educación superior y universidades) y los inmigrantes de habilidades extraordinarias en las artes escénicas. Una petición de una designación del Anejo A debe ir acompañada de un Formulario ETA-9089 completado y no certificado, incluidos todos los apéndices correspondientes, una Determinación Final, y un número de rastreo de determinación de salario prevaleciente válido en la Sección E, Ítem 1 del Formulario ETA-9089 (Solicitud de designación de Anejo A).<br></p><p>Además, para la segunda categoría de preferencia, una petición de inmigrante puede solicitar una exención de la oferta de empleo, y, por lo tanto, del requisito de certificación de condición laboral, porque es en el interés nacional de Estados Unidos. Las peticiones de exención por interés nacional deben ir acompañadas de un Formulario ETA-9089, Apéndice A y un Formulario ETA-9089, Determinación Final, firmado.<br></p><p>Para información adicional sobre certificaciones de condición laboral y el Anejo A y las exenciones por interés nacional, vea las páginas Segunda Preferencia EB2 y Tercera Preferencia EB-3.</p>"
+            },
+
+            "trabajar-2": {
+                cat: "TRABAJAR EN ESTADOS UNIDOS",
+                tit: "Trabajadores Temporales <br> <span class='text-teal'>(No Inmigrantes)</span>",
+                cuerpo: "<p>Para que usted venga a Estados Unidos de manera legal como no inmigrante para trabajar temporalmente en Estados Unidos, por lo general, su empleador potencial tiene que presentar una petición en su nombre ante USCIS.<br></p><p><strong>Cónyuges e Hijos que Solicitan la Clasificación de Dependiente No Inmigrante</strong><br>Los cónyuges e hijos que cualifican bajo la clasificación de dependiente no inmigrante de un trabajador temporal y están fuera de Estados Unidos deben presentar su solicitud directamente en un consulado o embajada estadounidense para obtener una visa, a menos que estén exentos.<br></p><p>Los cónyuges e hijos que solicitan un cambio de estatus o una extensión de estadía bajo la clasificación dependiente no inmigrante deberán presentar el Formulario I-539, Solicitud de Extensión o Cambio de Estatus de No Inmigrante. Por favor, vea las instrucciones del Formulario I-539 para obtener más información sobre los procedimientos de presentación de esta solicitud.<br></p><p><strong>Información sobre Impuestos Federales</strong><br>Los extranjeros que trabajan en los Estados Unidos pudieran tener obligación contributiva en Estados Unidos. Para más información, vea la página Obligación Contributiva de los Extranjeros No Residentes (en inglés) en el sitio web del Servicio Federal de Impuestos Internos (IRS).<br></p><p><strong>Información sobre el Número de Seguro Social</strong><br>Por lo general, solamente los extranjeros que tienen un permiso para trabajar emitido por el Departamento de Seguridad Nacional pueden solicitar un número de Seguro Social. Encuentre información sobre Trabajadores Extranjeros y Número de Seguro Social (PDF) (en inglés) en el sitio web de la Administración del Seguro Social.</p>"
+            },
+
+            "trabajar-3": {
+                cat: "TRABAJAR EN ESTADOS UNIDOS",
+                tit: "Central <br> <span class='text-teal'>I-9</span>",
+                cuerpo: "<p>La ley federal requiere que cada empleador <strong>reclutador agrícola, que refiere por pago, o contrata a una persona para empleo en EE.UU.</strong> debe completar el Formulario I-9, Verificación de Elegibilidad de Empleo. El Formulario I-9 le ayudará a verificar la identidad de su empleado y su autorización de empleo.<br></p><p><strong>NOTA: Nos referiremos tanto a empleadores como a reclutadores agrícolas y personas que refieren, pagados colectivamente como \"empleadores\" a través de la Central I-9.</strong></p>"
+            },
+            "evite-1": {
+                cat: "EVITE LAS ESTAFAS DE INMIGRACIÓN",
+                tit: "Encuentre <br> <span class='text-teal'>Servicios Legales</span>",
+                cuerpo: "<p>Aunque usted mismo puede presentar sus formularios, muchas personas optan por buscar ayuda de representación legal. Si busca representación legal, tenga en cuenta las siguientes guías. Un representante legal autorizado debe:<br></p><p><strong>Ser un abogado que:</strong><br></p><ul><li>• Es miembro acreditado en buena reputación del colegio de abogados del tribunal de un estado, territorio o Distrito de Columbia;</li><li>• No está restringido o de otra manera descalificado para ejercer la abogacía; y</li><li>• Elegible para ejercer la abogacía en Estados Unidos.</li></ul><p>Un representante acreditado por la Oficina de Programas de Acceso Legal (OLAP) del Departamento de Justicia (DOJ) y trabaja para organización reconocida por DOJ en la Lista de Organizaciones Reconocidas y Representantes Acreditados. Un representante legal autorizado puede:<br></p><p><strong>Aconsejarle sobre cuáles formularios debe presentar y cuándo presentarlos;</strong><br></p><ul><li>• Aconsejarle sobre los documentos y evidencia correctos que debe presentar;</li><li>• Explicar las opciones de inmigración que tenga;</li><li>• Ayudarle a completar los formularios de USCIS; y</li><li>• Comunicarse con USCIS acerca de su caso.</li></ul><p>Esta no es usa lista exhaustiva. Para información adicional, por favor, vea las listas de Organizaciones Reconocidas y Representantes Acreditados del DOJ.<br></p><p>Para ayudarle encontrar un representante legal autorizado, el Colegio de Abogados Estadounidenses proporciona información sobre cómo encontrar un abogado en su estado. El DOJ también proporciona una lista de abogados que bridan servicios de inmigración gratis o a bajo costo. DOJ también proporciona una lista de representantes acreditados y organizaciones reconocidas. Su representante legal autorizado debe presentar el Formulario G-28, Notificación sobre Comparecencia como Abogado o Representante Autorizado con la solicitud, petición o apelación relacionada. USCIS enviará información sobre su caso a usted y a su representante legal autorizado, si lo tiene.<br></p><p><strong>Al elegir un abogado, usted debe:</strong><br></p><ul><li>• Asegurarse de que el abogado sea elegible para ejercer la práctica legal y sea un miembro acreditado de buena reputación del l organismo jurídico más alto de cualquier estado, posesión, territorio o mancomunidad de EE.UU. o el Distrito de Columbia.</li><li>• Asegurarse de que el abogado no esté bajo ninguna orden judicial que restrinja su práctica de la abogacía.</li><li>• Pedir ver el documento de licencia vigente del abogado y verificar a través del organismo jurídico estatal responsable de regular a los abogados que la persona sea elegible para ejercer la práctica legal.</li><li>• Verificar la lista de practicantes actualmente disciplinados. Aquí es donde la Oficina Ejecutiva de Casos de Inmigración (EOIR) enumera a las personas que han sido expulsadas, inhabilitadas o suspendidas de ejercer la abogacía ante USCIS. Los abogados que están en la lista y que tienen un \"No\" en la última columna a la derecha no son elegibles para brindarle asesoramiento legal. Si el abogado ha sido expulsado, pero indica que han sido reintegrado, pida ver una copia de la orden de restitución de la EOIR.<br></li></ul><p><strong>ADVERTENCIA: Los \"notarios\", notarios públicos, consultores y empresas de inmigración no pueden brindarle asesoramiento legal sobre inmigración a menos que sean proveedores de servicios autorizados. En muchos otros países, la palabra \"notario\" significa que la persona es un abogado, pero eso no es así en Estados Unidos. Si necesita ayuda con asuntos de inmigración, tenga mucho cuidado antes de pagar dinero a cualquier persona que no sea abogado ni representante acreditado por la EOIR o que trabaje en una organización reconocida por la EOIR. Vea más información sobre los “notarios públicos” en nuestra página web Estafas Comunes.</strong></p>"
+            },
+
+            "evite-2": {
+                cat: "EVITE LAS ESTAFAS DE INMIGRACIÓN",
+                tit: "Estafas <br> <span class='text-teal'>Comunes</span>",
+                cuerpo: "<p>Use esta información para evitar estafas comunes de inmigración. Si sospecha que es víctima de fraude de inmigración, puede reportarlo a Comisión Federal de Comunicaciones o a la oficina de protección al consumidor de su estado.</p>"
+            },
+
+            "evite-3": {
+                cat: "EVITE LAS ESTAFAS DE INMIGRACIÓN",
+                tit: "Reporte Estafas <br> <span class='text-teal'>de Inmigración</span>",
+                cuerpo: "<p>¿Ha sido víctima de una estafa de servicios de inmigración y necesita ayuda?<br></p><p><strong>Cómo Reportar Estafas de Inmigración</strong><br>Denuncie la estafa ante la oficina estatal de protección al consumidor. Consulte la tabla a continuación para obtener información específica del estado.<br></p><p>Si usted perdió dinero u otras posesiones en una estafa, repórtalo también a la policía local. Para obtener más información sobre dónde denunciar fraudes y estafas, visite la página web de Estafas y Fraudes Comunes de USA.gov/es.<br></p><p>Siempre puedes denunciar las estafas a la Comisión Federal de Comercio. En la siguiente tabla, incluimos información sobre dónde denunciar estafas en tu estado y enlaces a las leyes que te protegen como consumidor.<br></p><p><strong>Sitios Web Fraudulentos y Cuentas en las Redes Sociales</strong><br>Algunos sitios web y cuentas de redes sociales afirman estar afiliados a USCIS y ofrecen instrucciones paso a paso sobre cómo completar una solicitud o petición de USCIS. Para denunciar un sitio web o una cuenta de redes sociales que afirme estar afiliada a USCIS.<br></p><p><strong>Dónde Reportar Estafas de Inmigración por Estado</strong><br>Relevo de responsabilidad: USCIS recopiló información sobre el estado y el territorio de los sitios web gubernamentales oficiales de los 50 estados de Estados Unidos, el Distrito de Columbia y los territorios estadounidenses. Aunque intentamos verificar la información contenida en estas listas, no podemos garantizar la precisión de todos los números de teléfono, direcciones web y otra información.</p>"
+            },
+            "form-1": {
+                cat: "Formularios más Utilizados",
+                tit: "I – 9, Verificación de <br> <span class='text-teal'>Elegibilidad de Empleo</span>",
+                cuerpo: "<p>Use el Formulario I-9, Verificación de Elegibilidad de Empleo, para verificar la identidad y autorización de empleo de las personas contratadas para trabajar, en Estados Unidos. Todos los empleadores estadounidenses deben completar y presentar el Formulario I-9 por cada persona que contratan para trabajar en Estados Unidos. Esto incluye a ciudadanos y extranjeros. Tanto empleados como empleadores (o representantes autorizados del empleador) deben completar el formulario.<br></p><p>En el formulario, el empleado debe dar fe de su autorización de empleo. El empleado también debe presentar a su empleador documentos aceptables que evidencien su identidad y autorización de empleo. El empleador debe examinar la elegibilidad del empleo e identificar documentos que presenta el empleado, a fin de determinar si los mismos tienen validez y se relacionan con la persona y registrar esta información en el Formulario I-9. Ciertos empleadores que desean examinar los documentos de los empleados de manera remota bajo un procedimiento alterno aprobado por DHS en lugar del examen físico deben indicarlo marcando la casilla proporcionada. Para obtener información adicional, consulte la pestaña Instrucciones Especiales a continuación.</p>"
+            },
+
+            "form-2": {
+                cat: "Formularios más Utilizados",
+                tit: "I – 485, Solicitud de Registro de Residencia <br> <span class='text-teal'>Permanente o Ajustar Estatus</span>",
+                cuerpo: "<p>Use este formulario para solicitar el estatus como residente permanente legal si está en Estados Unidos.</p>"
+            },
+
+            "form-3": {
+                cat: "Formularios más Utilizados",
+                tit: "I – 765, Solicitud de <br> <span class='text-teal'>Autorización de Empleo</span>",
+                cuerpo: "<p>Algunos extranjeros que están en Estados Unidos pueden utilizar el Formulario I-765, Solicitud de Autorización de Empleo, para solicitar una autorización de empleo y un Documento de Autorización de Empleo. Otros extranjeros cuyos estatus migratorios les autorizan a trabajar en Estados Unidos sin restricciones también pueden utilizar el Formulario I-765 para solicitar un EAD que demuestre dicha autorización.<br></p><p>Si usted aún no ha comenzado el proceso de solicitud de autorización de empleo (EAD), puede comenzarlo aquí, creando una cuenta de USCIS en línea y presentando el Formulario I-765. Si aprobamos su solicitud, le enviaremos su permiso de trabajo a la dirección que proporcionó en su solicitud. Si es necesario, puede presentar su Formulario I-765 en formato impreso en lugar de presentarlo en línea.<br></p><p>Después de que aprobemos el Formulario I-765, su tarjeta de EAD será producida dentro del plazo de 2 semanas. Le enviaremos su tarjeta EAD por correo a través del servicio Priority Mail del Servicio Postal de Estados Unidos (USPS).<br></p><p>Asegúrese de que tiene la dirección postal correcta registrada con USCIS. Si su dirección postal cambia después de que usted presentó su solicitud, debe actualizar su dirección con USCIS y USPS lo antes posible. Si no actualiza su dirección rápidamente, su caso podría demorarse, sus documentos podrían perderse y es posible que usted tenga que volver a presentar la solicitud y pagar la tarifa.<br></p><p>El plazo en el que reciba su tarjeta EAD puede variar, según los tiempos de entrega de USPS. Por favor, permita un total de 30 días a partir de la aprobación antes de enviar una consulta a USCIS. Lo exhortamos a usar la herramienta Estatus de Caso En Línea para encontrar su número de rastreo de USPS sobre la entrega de la tarjeta EAD. Si usted no ha recibido su tarjeta EAD dentro de este plazo, por favor, visite la página e-Request – Herramientas de Autoservicio para obtener instrucciones sobre cómo enviar una consulta.</p>"
+            },
+
+            "form-4": {
+                cat: "Formularios más Utilizados",
+                tit: "I – 90, Solicitud para <br> <span class='text-teal'>Reemplazar la Tarjeta</span>",
+                cuerpo: "<p>Utilice este formulario para reemplazar su tarjeta de residencia permanente (también conocida como Green Card).<br></p><p>Antes de presentar el Formulario I-90, utilice nuestra herramienta Verifique su Elegibilidad para Naturalización, a continuación, para ver si usted es elegible para convertirse en ciudadano estadounidense.</p>"
+            },
+
+            "form-5": {
+                cat: "Formularios más Utilizados",
+                tit: "N – 400, Solicitud de <br> <span class='text-teal'>Naturalización</span>",
+                cuerpo: "<p>La naturalización es el proceso de convertirse en ciudadano estadounidense si nació fuera de Estados Unidos. Utilice este formulario para solicitar la naturalización si cumple con los requisitos de elegibilidad.</p>"
+            },
+
+            "form-6": {
+                cat: "Formularios Basados en la Familia",
+                tit: "I-129F, Petición de Prometido <br> <span class='text-teal'>o Prometida Extranjero(a)</span>",
+                cuerpo: "<p>Utilice este formulario para traer a su:<br></p><ul><li>• Prometido(a)(K-1) y los hijos de este(a) (K-2) a Estados Unidos para que usted contraiga matrimonio con su prometido; o</li><li>• Su cónyuge (K-3) y a los hijos de esa persona (K- 4) a Estados Unidos para esperar la aprobación de un Formulario I-130 presentado en nombre de su cónyuge.<br></li></ul><p><strong>Cómo Reportar Sospechas de Fraude Matrimonial</strong><br>El Servicio de Inmigración y Control de Aduanas (ICE) tiene un formulario de confidencias en línea (enlace en inglés) para reportar sospechas de beneficios/matrimonio fraudulento u otras violaciones de ley.<br></p><p><strong>Ayuda para Víctimas de Delitos Relacionados con Inmigración</strong><br>Existen diferentes tipos de ayudas disponibles a través de la Oficina de Enlace para Víctimas de Delitos Relacionados con Inmigración (VOICE) de ICE.</p>"
+            },
+
+            "form-7": {
+                cat: "Formularios Basados en la Familia",
+                tit: "I-130, Petición de <br> <span class='text-teal'>Familiar Extranjero</span>",
+                cuerpo: "<p>Utilice este formulario si usted (el peticionario) es un ciudadano o residente permanente legal (LPR) de Estados Unidos o nacional de Estados Unidos que necesita demostrar la relación que tiene con un familiar elegible (el beneficiario) que desea venir o permanecer en Estados Unidos permanentemente y solicitar una Tarjeta de Residente Permanente (también conocida como Green Card o Tarjeta Verde).<br></p><p><strong>Usted debe seleccionar sólo una opción en la Parte 4 (Preguntas 61 o 62)</strong> para indicar si el beneficiario solicitará ajuste de estatus dentro de Estados Unidos o el procesamiento de su visa en el extranjero. <strong>No responda ambas preguntas ni deje esta sección en blanco.</strong><br></p><p><strong>Información de Procesamiento</strong><br>Presentar el Formulario I-130, Petición de Familiar Extranjero es el primer paso para ayudar a un familiar elegible a solicitar inmigrar a Estados Unidos y solicitar una tarjeta de residente permanente. La presentación o aprobación de esta petición no le otorga a su familiar ningún estatus o beneficio de inmigración.<br></p><p>Usualmente, aprobamos su Formulario I-130 si usted puede demostrar una relación cualificada existente entre usted y el familiar que cualifica a inmigrar a Estados Unidos. Por lo general, una vez que aprobemos la petición, su familiar puede solicitar una tarjeta de residencia permanente. Si su familiar ya está en Estados Unidos y hay una visa de inmigrante disponible, podrá ser elegible para solicitar su tarjeta de residente permanente mediante la presentación de un Formulario I-485, Solicitud de Registro de Residencia Permanente o Ajuste de Estatus.<br></p><p>Algunos familiares deben esperar hasta que haya un número de visa de inmigrante disponible antes de que puedan presentar el Formulario I-485 (ajustar su estatus si ya está en Estados Unidos) o solicitar una visa de inmigrante en una embajada o consulado a través del procesamiento consular (si esta fuera de Estados Unidos). Sin embargo, si su familiar cualifica como familiar inmediato, siempre habrá una visa de inmigrante disponible.<br></p><p>Si su familiar ya está en Estados Unidos, pero no es elegible para solicitar la tarjeta de residente permanente mediante la presentación del Formulario I-485, su familiar puede ser elegible para solicitar una visa de inmigrante con el Departamento de Estado de Estados Unidos en una embajada o consulado estadounidense en su país, a través del trámite consular. Para obtener más información sobre la elegibilidad y el proceso para solicitar una tarjeta de residente permanente, visite nuestra página Categorías de Elegibilidad a la Residencia Permanente.<br></p><p>Al completar el Formulario I-130, Petición de Familiar Extranjero, asegúrese de que usted (el peticionario) seleccione sólo una opción al indicar si el beneficiario solicita un ajuste de estatus dentro de Estados Unidos o el procesamiento consular fuera de Estados Unidos. Si el Formulario I-130 aún está pendiente con USCIS y desea cambiar su selección (ya sea para el procesamiento consular en el extranjero o ajustar el estatus en Estados Unidos), puede comunicarse con el Centro de Contacto de USCIS y solicitar un cambio. Si desea cambiar su selección después de que ya hayamos aprobado su petición, es posible que deba presentar el Formulario I-824, Solicitud de Acción sobre una Solicitud o Petición Aprobada.</p>"
+            },
+
+            "form-8": {
+                cat: "Formularios Basados en la Familia",
+                tit: "I-360, Petición para Amerasiático, <br> <span class='text-teal'>Viudo(a), o Inmigrante Especial</span>",
+                cuerpo: "<p>La petición se utiliza para clasificar a un extranjero como:<br></p><ul><li>• Amerasiático (nacido después del 31 de diciembre de 1950 y antes de 23 de octubre de 1982);</li><li>• Viudo o viuda de un ciudadano estadounidense;</li><li>• Autopeticionario VAWA que es cónyuge maltratado o abusado por un ciudadano o residente permanente legal de Estados Unidos bajo VAWA;</li><li>• Autopeticionario VAWA que es el hijo de un ciudadano o residente permanente legal maltratante;</li><li>• Autopeticionario VAWA que es el padre maltratado o abusado de un hijo(a) ciudadano estadounidense que tiene 21 años de edad o más, o</li><li>• Inmigrante especial. Se definimos un inmigrante especial como uno de los siguientes:<br></li><li>• Trabajador religioso;</li><li>• Empleado de la compañía del Canal de Panamá, empleado del gobierno de la Zona del Canal, empleado del Gobierno de los Estados Unidos en la Zona del Canal;</li><li>• Médico autorizado y practicante de medicina en un estado de Estados Unidos a partir del 9 de enero de 1978;</li><li>• Empleado de organización internacional u Empleado o Familiar OTAN-6;</li><li>• Joven que necesita la protección de un tribunal de menores porque ha sido abusado, objeto de negligencia o abandonado por un padre;</li><li>• Miembro de las Fuerzas Armadas;</li><li>• Nacional de Afganistán o Iraq que brindó apoyo como traductor a las Fuerzas Armadas de Estados Unidos;</li><li>• Nacional de Iraq que trabajó para el Gobierno de Estados Unidos o en su nombre en Iraq;</li><li>• Nacional de Afganistán que trabajó para el Gobierno de Estados Unidos o para la Fuerza Internacional de Asistencia en Seguridad (ISAF) en Afganistán, o</li><li>• Representante de los medios de comunicación de la Agencia de Medios Globales de Estados Unidos (USAGM) para un beneficiario USAGM.<br></li></ul><p>Otras clasificaciones no listadas anteriormente también podrían ser elegibles para utilizar el Formulario I-360. Por favor, lea las instrucciones del formulario para obtener más información.</p>"
+            },
+
+            "form-9": {
+                cat: "Formularios Basados en la Familia",
+                tit: "I-600, Petición para Clasificar <br> <span class='text-teal'>Huérfano como Familiar Inmediato</span>",
+                cuerpo: "<p>Los ciudadanos estadounidenses utilizan este formulario para que USCIS clasifique a un huérfano como familiar inmediato. El padre adoptivo ciudadano estadounidense o tutor legal presenta la petición para finalizar el proceso de inmigración para un niño que usualmente no es un residente habitual de un país parte de la Convención de Adopción de La Haya.</p>"
+            },
+
+            "form-10": {
+                cat: "Formularios Basados en la Familia",
+                tit: "I-751, Petición para Cancelar las <br> <span class='text-teal'>Condiciones en la Residencia</span>",
+                cuerpo: "<p>Utilice este formulario si usted es un residente permanente condicional que obtuvo el estatus a base de matrimonio y desea solicitar remover las condiciones en su estatus de residente permanente.</p>"
+            },
+
+            "form-11": {
+                cat: "Formularios Basados en el Empleo",
+                tit: "I-140, Petición para <br> <span class='text-teal'>Trabajador Inmigrante Extranjero</span>",
+                cuerpo: "<p>Utilice este formulario para solicitar que un trabajador extranjero se convierta en un residente permanente legal de Estados Unidos.</p>"
+            },
+
+            "form-12": {
+                cat: "Formularios Basados en el Empleo",
+                tit: "I-526, Petición de Inmigrante <br> <span class='text-teal'>por Inversionista Independiente</span>",
+                cuerpo: "<p>Utilice este formulario si usted es un inversionista independiente para solicitar a USCIS el estatus de inmigrante en Estados Unidos bajo la sección 203(b)(5) de la Ley de Inmigración y Nacionalidad (INA), según sus enmiendas.</p>"
+            },
+
+            "form-13": {
+                cat: "Formularios Basados en el Empleo",
+                tit: "I-539, Solicitud de Extensión o <br> <span class='text-teal'>Cambio de Estatus de No Inmigrante</span>",
+                cuerpo: "<p>Los grupos siguientes utilizan este formulario:<br></p><ul><li>• Algunos no inmigrantes que desean extender su estadía o cambiar a algún otro estatus de no inmigrante;</li><li>• Residentes de la Mancomunidad de las Islas Marianas del Norte (CMNI) que solicitan un estatus inicial;</li><li>• No inmigrantes F y M que solicitan reinstalación; y</li><li>• Personas que desean obtener estatus de no inmigrante V o una extensión de estadía como no inmigrante V.<br></li></ul><p><strong>Debe revisar cuidadosamente las instrucciones de presentación del Formulario I-539 antes de presentar su petición para asegurar que presenta su petición para una extensión o cambio de estatus utilizando el formulario correcto.</strong><br></p><p>Las solicitudes de extensiones de estadía para permanecer en o para cambiar de estatus hacia ciertas clasificaciones basadas en el empleo se deben presentar en el Formulario I-129, Petición para Trabajador No Inmigrante, en lugar del Formulario I-539.<br></p><p><strong>NO</strong> debe presentar el Formulario I-539 para solicitar una extensión de estadía o cambio de estatus cualquiera de las siguientes clasificaciones:<br></p><ul><li>• Comerciantes por tratado comercial E-1 principales y empleados E-1 de un comerciante por tratado comercial</li><li>• Inversionistas por tratado comercial E-2 principales y empleados E-2 de los inversionistas por tratado comercial</li><li>• Inversionistas principales de CNMI E-2</li><li>• Trabajadores especializados principales E-3 de Australia</li><li>• [AVISO: Los dependientes elegibles de familiares de los no inmigrantes principales E deben presentar un Formulario I-539 para extender su estadía o cambiar su estatus a menos que deseen cambiar a un estatus indicado aquí. En este caso, NO pueden usar el Formulario I-539.]</li><li>• No Inmigrantes H-1B, H-1B1, H-2A, H-2B y H-3</li><li>• No Inmigrantes L-1</li><li>• No Inmigrantes O-1 y O-2</li><li>• No Inmigrantes P-1, P-2, P-3, P-1S, P-2S o P-3S</li><li>• No Inmigrantes Q-1</li><li>• No Inmigrantes R-1</li><li>• No Inmigrantes TN-1 y TN-2<br></li></ul><p><strong>AVISO IMPORTANTE: Presentar su petición en el formulario equivocado podrá resultará en el rechazo o denegación de su caso. USCIS no reembolsará su tarifa de presentación si su caso es denegado.</strong></p>"
+            },
+
+            "form-14": {
+                cat: "Formularios Basados en Asuntos Humanitarios",
+                tit: "I-589, Solicitud de Asilo <br> <span class='text-teal'>y de Suspensión de Remoción</span>",
+                cuerpo: "<p>Utilice este formulario para solicitar asilo en Estados Unidos y para una suspensión de remoción (antes llamada “suspensión de deportación”). Usted puede solicitar asilo si está físicamente en Estados Unidos y es extranjero.<br></p><p>Puede obtener asilo en Estados Unidos mediante:<br></p><ul><li>• La solicitud de asilo afirmativo si no está en procedimientos de remoción con la Oficina Ejecutiva de Revisión de Casos de Inmigración (EOIR); o</li><li>• La solicitud de defensa de asilo si está en procedimientos de remoción ante un juez de inmigración o la Junta de Apelaciones de Inmigración (BIA) de EOIR.</li></ul><p>Si usted no presenta el Formulario I-589 dentro del plazo de un año a partir de su llegada a Estados Unidos, no será elegible para solicitar asilo bajo la sección 208(a)(2)(B) de la Ley de Inmigración y Nacionalidad (INA).<br></p><p>El Formulario I-589, Solicitud de Asilo y de Suspensión de Remoción, y sus instrucciones están disponibles en 12 idiomas... USCIS solo aceptará la versión oficial en inglés para todos los formularios.<br></p><p><strong>¿Puedo presentar el Formulario I-589 con USCIS?</strong><br>La Herramienta de Instrucciones de Presentación proporciona información sobre dónde presentar el Formulario I-589 según la información que usted proporcione. La herramienta no determina si usted es elegible para asilo.<br></p><p>Para más información sobre si usted puede presentar el Formulario I-589 con USCIS, consulte la sección Dónde Presentar la Solicitud a continuación.<br></p><p>Si usted es elegible para presentar el Formulario I-589 con USCIS, revise las secciones Dónde Presentar la Solicitud e Instrucciones Especiales a continuación para saber si puede presentar su Formulario I-589 en línea, o si lo tiene que presentar por correo postal.</p>"
+            },
+
+            "form-15": {
+                cat: "Formularios Basados en Asuntos Humanitarios",
+                tit: "I-730, Petición de Familiar <br> <span class='text-teal'>de Refugiado/Asilado</span>",
+                cuerpo: "<p>Si usted es un refugiado principal admitido en Estados Unidos durante los últimos 2 años o un asilado principal a quien se le otorgó asilo durante los últimos 2 años, usted (el peticionario) puede usar este Formulario I-730, Petición de Familiar de Refugiado/Asilado para solicitar que su cónyuge e hijos solteros menores de 21 años (los beneficiarios) se unan a usted en Estados Unidos. Bajo ciertas circunstancias, los hijos solteros mayores de 21 años podrían ser elegibles para beneficios de inmigración para la reunificación familiar (conocido en inglés como “following-to-join”). Para más información, vea nuestra página Ley de Protección de Estatus del Menor. En algunos casos, también podríamos conceder una exención del plazo límite de 2 años para presentar la solicitud por razones humanitarias. Vea las instrucciones del Formulario I-730 para obtener información adicional.<br></p><p><strong>RECORDATORIO:</strong> Por favor, envíe una fotografía tipo pasaporte o una fotografía clara y reciente de cada familiar por quien presenta una petición. Si no proporciona la foto requerida, podríamos emitir una Solicitud de Evidencia y tomará más tiempo procesar su petición.</p>"
+            },
+
+            "form-16": {
+                cat: "Formularios Basados en Asuntos Humanitarios",
+                tit: "I-821, Solicitud de Estatus <br> <span class='text-teal'>de Protección Temporal</span>",
+                cuerpo: "<p>Si usted cree que es un nacional elegible de un país designado o una persona que no tiene nacionalidad y su última residencia habitual fue en un país designado para el Estatus de Protección Temporal (TPS), utilice este formulario para solicitar el TPS. Cuando vaya a presentar la solicitud inicial de TPS o se reinscriba en el TPS, también puede solicitar la Autorización de Empleo (EAD) y presentar el Formulario I-765, Solicitud de Autorización de Empleo completado en el momento que presenta el Formulario I-821.<br></p><p>También puede presentar el Formulario I-765 por separado en una fecha posterior.</p>"
+            },
+            "ciudadania-1": {
+                cat: "Aprendices",
+                tit: "Solicite la <br> <span class='text-teal'>Ciudadanía</span>",
+                cuerpo: "<p><strong>Solicitar la Naturalización</strong><br>Como residente permanente legal, usted puede ser elegible para convertirse en un ciudadano estadounidense a través de la naturalización. Al solicitar la naturalización, usted está dando pasos para hacer un compromiso de lealtad con Estados Unidos. Verifique su elegibilidad para la naturalización.<br></p><p><strong>Si usted es elegible para solicitar la naturalización, a continuación le indicamos cómo comenzar el proceso de solicitud:</strong><br></p><ul><li>• Cree una cuenta en myaccount.uscis.gov</li><li>• Prepare su Formulario N-400, Solicitud de Naturalización, y envíe su solicitud</li></ul>"
+            },
+
+            "ciudadania-2": {
+                cat: "Aprendices",
+                tit: "Aprenda sobre <br> <span class='text-teal'>Ciudadanía</span>",
+                cuerpo: "<p>En esta sección del Centro de Recursos de Ciudadanía, aprenda acerca de las importantes razones para convertirse en ciudadano estadounidense y las vías obtener para la ciudadanía. Además, encuentre información acerca del proceso de naturalización y lo que necesita saber acerca de la entrevista de y el examen naturalización.<br></p><p><strong>¿Debería Considerar la Ciudadanía Estadounidense?</strong><br>Aprenda sobre los importantes derechos y responsabilidades de tener la ciudadanía y las razones para convertirse en ciudadano.<br></p><p><strong>Ciudadanía y Naturalización</strong><br>Aprenda acerca de las diferentes maneras de obtener la ciudadanía. Según su situación, se aplican diferentes requisitos. Explore los enlaces a continuación:<br></p><ul><li>• He sido un Residente Permanente durante 5 años</li><li>• Estoy Casado(a) con un Ciudadano Estadounidense</li><li>• Soy Miembro Activo de las Fuerzas Armadas de los Estados Unidos</li><li>• Soy Hijo(a) de un Ciudadano Estadounidense</li></ul><p>También visite la página de <strong>Ciudadanía para Familiares de Militares</strong><br></p><p><strong>10 Pasos Hacia la Naturalización</strong><br>Aprenda sobre los 10 pasos del proceso de naturalización para convertirse en ciudadano.<br></p><p><strong>La Entrevista y el Examen de Naturalización</strong><br>Entérese sobre qué esperar durante su entrevista para naturalización.<br></p><p><strong>Ceremonias de Naturalización</strong><br>Lea sobre lo que sucede durante la ceremonia de naturalización. Tomar el Juramento de Lealtad es el último paso en el proceso de naturalización.<br></p><p><strong>Preguntas Frecuentes</strong><br>Encuentre respuestas a las preguntas más frecuentes sobre el proceso de naturalización.</p>"
+            },
+
+            "ciudadania-3": {
+                cat: "Educadores",
+                tit: "Materiales Educativos para Educadores <br> <span class='text-teal'>y Administradores de Programas</span>",
+                cuerpo: "<p>USCIS ha desarrollado una variedad de materiales para ayudar a los <strong>educadores</strong> a complementar la instrucción en el salón de clases con el fin de preparar a sus estudiantes para el proceso de naturalización y el examen de inglés y civismo.<br></p><p>Los <strong>administradores del programa</strong> pueden usar los recursos que se encuentran en esta sección para mejorar la educación en ciudadanía para adultos y los programas de inglés como segundo idioma. Las organizaciones comunitarias, con base religiosa y cívicas, así como empleadores que desean ayudar a los inmigrantes a adaptarse a la vida en Estados Unidos y prepararse para la ciudadanía también pueden encontrar recursos útiles para apoyar sus iniciativas.<br></p><p>Visite la página Estudie para el Examen para encontrar materiales para el examen de inglés y examen de educación cívica, que se utilizarán como parte de los recursos de su salón de clases. Cualquiera de estos recursos también puede servir como herramientas de estudio individual.<br></p><p>Visite la tienda de libros del Gobierno de EE. UU. para comprar materiales y publicaciones de USCIS.</p>"
+            },
+
+            "ciudadania-4": {
+                cat: "Educadores",
+                tit: "Próximas Capacitaciones <br> <span class='text-teal'>para Maestros</span>",
+                cuerpo: "<p>USCIS ofrece seminarios de capacitación gratuitos diseñados para mejorar las habilidades necesarias para la enseñanza de historia, educación cívica y el proceso de naturalización a estudiantes inmigrantes. Estas habilidades ayudarán a educadores, voluntarios y organizaciones a ofrecer un programa integral de ciudadanía para adultos.<br></p><p>USCIS no certifica profesores o programas de ciudadanía para adultos.<br></p><p><strong>¿Qué Aprenderé?</strong><br>Obtenga más información sobre lo que USCIS ofrece en los seminarios de capacitación.<br></p><p><strong>Preguntas Frecuentes</strong><br>Encuentre respuestas a las preguntas más frecuentes sobre los seminarios de capacitación.<br></p><p><strong>¿Cómo me Inscribo en un Seminario Web?</strong><br>Use nuestro portal para inscripciones.<br></p><p>Si no recibe un correo electrónico de confirmación de nuestra parte en un plazo de 5 a 7 días hábiles después de haberse registrado o no puede enviar su formulario de registro envíe un correo electrónico a la Oficina de Ciudadanía. Para solicitar acomodos especiales, envíe un correo electrónico a la Oficina de Ciudadanía 45 días antes del seminario de capacitación. Además, vea nuestros seminarios de capacitación anteriores.<br></p><p><strong>Suscríbase para recibir mensajes de correo electrónico sobre actualizaciones del Centro de Recursos de Ciudadanía.</strong></p>"
+            },
+
+            "ciudadania-5": {
+                cat: "Educadores",
+                tit: "Recursos para <br> <span class='text-teal'>Programas Educativos</span>",
+                cuerpo: "<p>Los educadores y voluntarios desempeñan un papel fundamental en ayudar a los inmigrantes a prepararse para la ciudadanía estadounidense. Utilice esta sección del Centro de Recursos de Ciudadanía para encontrar materiales para incluir o mejorar su currículo y complementar los materiales de estudio en el salón de clases.<br></p><p>Asegúrese de visitar a la página de seminarios de capacitación para obtener una lista de oportunidades de capacitación gratuitas en su área. Estos seminarios están diseñados para mejorar las habilidades necesarias para enseñar historia de Estados Unidos, civismo y el proceso de naturalización para residentes permanentes legales.<br></p><p><strong>Materiales Educativos para Educadores y Administradores de Programas</strong><br>En esta sección, los educadores encontrarán recursos útiles para el salón de clases tanto para ellos como para sus estudiantes. Los administradores del programa podrán encontrar una variedad de materiales para mejorar su programa de educación en ciudadanía para adultos.<br></p><p><strong>Regístrese para Seminarios de Capacitación</strong><br>USCIS ofrece seminarios de capacitación gratuitos para educadores, directores de programas, voluntarios y organizaciones.<br></p><p><strong>Recursos Adicionales</strong></p><ul><li>• Conozca el Proceso de Naturalización</li><li>• Preparar a los Estudiantes para la Entrevista y Examen</li><li>• Aprender Nuevas Técnicas de Enseñanza</li><li>• Iniciar un Programa de Ciudadanía</li><li>• Promover un Programa de Ciudadanía</li><li>• Capacitar y Desarrollar las Destrezas del Personal.</li></ul>"
+            },
+
+            "ciudadania-6": {
+                cat: "Organizaciones",
+                tit: "Herramientas de <br> <span class='text-teal'>Enlace Comunitario</span>",
+                cuerpo: "<p>Las comunidades locales tienen un rol importante en asistir a los residentes legales permanentes para asimilar la cultura americana. En esta sección del Centro de Recursos para Ciudadanía encontrará materiales de alcance para promover la educación para ciudadanía y aprender cómo su organización puede apoyar a los inmigrantes durante el proceso de naturalización.<br></p><p><strong>Campaña de Educación Pública sobre Ciudadanía</strong><br>Esta campaña de concientización pública promueve los derechos, responsabilidades e importancia de la ciudadanía estadounidense, y los recursos gratuitos de USCIS de preparación para la naturalización.<br></p><p><strong>Hojas informativas sobre Elegibilidad a la Naturalización y Hojas Informativas sobre Promoción de la Ciudadanía</strong><br>USCIS ha desarrollado hojas informativas para ayudar a llevar información a grupos específicos que pueden tener circunstancias especiales en común. Las Hojas Informativas sobre Elegibilidad a la Naturalización proporcionan información sobre estas poblaciones en ciudades y regiones de Estados Unidos, con información sobre circunstancias específicas de los residentes permanentes legales en esas áreas. Las Hojas Informativas sobre Promoción de la Ciudadanía se desarrollaron para promover la naturalización de personas con circunstancias específicas, como personas de bajos ingresos, personas de 50 años o más, y ex refugiados y asilados, por nombrar algunos.<br></p><p><strong>Instale un Rincón de Ciudadanía</strong><br>Los Rincones de Ciudadanía pueden ser instalado en bibliotecas, organizaciones, lugares de trabajo, o instalaciones de la ciudad para proveer información acerca del proceso de naturalización y materiales de estudio para ciudadanía. Instale su rincón hoy.<br></p><p><strong>Bibliotecas</strong><br>Las bibliotecas tienen un rol importante en el servicio a la comunidad inmigrante. Lea cómo las bibliotecas pueden apoyar a las comunidades inmigrantes.<br></p><p><strong>Museos</strong><br>Los museos ofrecen una oportunidad única para ayudar a los inmigrantes a aprender sobre la historia de Estados Unidos y el gobierno, así como para exhortar a la participación cívica.<br></p><p><strong>Organizaciones Comunitarias</strong><br>Aprenda cómo las organizaciones comunitarias pueden apoyar los esfuerzos para la ciudadanía en sus comunidades.<br></p><p><strong>Gobiernos Locales</strong><br>Las comunidades locales tienen un papel importante en acoger y ayudar a los inmigrantes. Encuentre recursos para los gobiernos locales que apoyan la educación para ciudadanía.<br></p><p><strong>Empleadores</strong><br>Los empleadores pueden promover la ciudadanía entre sus empleados que son elegibles, lo que puede beneficiar a ambos, el lugar de empleo y a la comunidad en general. Encuentre recursos disponibles para usted y su empresa para apoyar la educación y conocimientos sobre ciudadanía.</p>"
+            },
+
+            "ciudadania-7": {
+                cat: "Organizaciones",
+                tit: "Datos y Estadísticas Relacionadas <br> <span class='text-teal'>con la Naturalización</span>",
+                cuerpo: "<p>USCIS tiene datos sobre estadísticas de naturalización, tales como el número de naturalizaciones, los países de nacimiento de los recién naturalizados, dónde residen en Estados Unidos, y cuánto tiempo les lleva convertirse en ciudadanos.<br></p><p>USCIS también tiene datos sobre el desempeño de los solicitantes de naturalización en el examen de naturalización y sobre la población de personas elegibles para naturalizarse.<br></p><p><strong>Estadísticas de Naturalización</strong><br>Encuentre datos sobre la población de recién naturalizados.<br></p><p><strong>Desempeño en el Examen de Naturalización</strong><br>Encuentre datos sobre el desempeño de los solicitantes en el examen de naturalización.<br></p><p><strong>Datos de Elegibilidad a la Naturalización</strong><br>Encuentre datos sobre aquellos elegibles para naturalizarse.</p>"
+            },
+           "residencia-1": {
+                cat: "Residencia Permanente",
+                tit: "Ajuste de <br> <span class='text-teal'>Estatus</span>",
+                cuerpo: "<p>El Ajuste de Estatus es el proceso que puede usar para solicitar el estatus de residente permanente legal (también conocido como solicitar una Tarjeta Verde o Green Card) cuando usted está presente en Estados Unidos. Esto significa que usted puede obtener una Tarjeta de Residente Permanente sin tener que regresar a su país de origen para completar el trámite de la visa.<br></p><p>Si usted está fuera de Estados Unidos, debe obtener su visa en el extranjero a través del trámite consular.</p>"
+            },
+
+            "residencia-2": {
+                cat: "Residencia Permanente",
+                tit: "Después de que le Otorgamos la <br> <span class='text-teal'>Tarjeta de Residencia Permanente</span>",
+                cuerpo: "<p>Expedimos una tarjeta de residente permanente (conocida comúnmente como Green Card o Tarjeta Verde) a todos los residentes permanentes como prueba de están autorizados a vivir y trabajar en Estados Unidos. Si usted es un residente permanente que tiene 18 años de edad o más, tiene que llevar consigo una tarjeta de residente permanente válida en todo momento.<br></p><p>Esta página le brinda un breve resumen de las cosas principales que un residente permanente podría tener que hacer después de recibir una tarjeta de residente permanente.</p>"
+            },
+
+            "residencia-3": {
+                cat: "Residencia Permanente",
+                tit: "Disponibilidad de Visas <br> <span class='text-teal'>y Fechas de Prioridad</span>",
+                cuerpo: "<p>Esta página lo ayudará a entender cómo el Departamento de Estado (DOS) distribuye las visas de inmigrante, el proceso del Boletín de Visas de DOS y las maneras específicas para ajustar estatus según su situación.</p>"
+            },
+
+            "residencia-4": {
+                cat: "Residencia Permanente",
+                tit: "Documento de <br> <span class='text-teal'>Autorización de Empleo</span>",
+                cuerpo: "<p>Los empleadores estadounidenses deben asegurarse de que todos sus empleados, independientemente de su ciudadanía u origen nacional, estén autorizados para trabajar en Estados Unidos. Una manera de comprobar de que usted está autorizado a trabajar en Estados Unidos por un período de tiempo específico es con un Documento de Autorización de Empleo (Formulario I-766/EAD).<br></p><p>Por lo general, para solicitar un EAD, usted debe presentar el Formulario I-765, Solicitud de Autorización de Empleo. Deberá solicitar un EAD si:­­<br></p><ul><li>• Está autorizado para trabajar en Estados Unidos a base de estatus o circunstancias de inmigración, (por ejemplo, usted es asilado, refugiado o no inmigrante U) y necesita evidenciar su autorización de empleo; o</li><li>• Se le requiere solicitar un permiso de trabajo (en otras palabras, necesita solicitar una autorización de empleo) porque:<br></li><li>• Tiene en trámite un Formulario I-485, Solicitud de Registro de Residencia Permanente o Ajuste de Estatus.</li><li>• Tiene en trámite un Formulario I-589, Solicitud de Asilo y de Suspensión de Remoción.</li><li>• Tiene un estatus de no inmigrante o circunstancia que le permite estar en Estados Unidos, pero no le permite trabajar en Estados Unidos sin antes de pedir una autorización de empleo de USCIS (como, por ejemplo, un estudiante con visa F-1 o M-1).<br></li></ul><p>Usted no tiene que solicitar un EAD si es un residente permanente legal. Su Tarjeta de Residente Permanente (Formulario I-551) evidencia su autorización de empleo.<br></p><p>Tampoco tiene que solicitar un EAD si tiene un estatus de no inmigrante que le autoriza a trabajar para un empleador específico en virtud de su estatus (por ejemplo, si es un no inmigrante H-1B, L-1B, O o P).</p>"
+            },
+
+            "residencia-5": {
+                cat: "Residencia Permanente",
+                tit: "Categorías de Elegibilidad <br> <span class='text-teal'>a la Residencia Permanente</span>",
+                cuerpo: "<p>Para poder solicitar la Tarjeta de Residente Permanente (conocida como Tarjeta Verde o Green Card, usted debe ser elegible bajo una de las categorías indicadas a continuación. Una vez que usted identifique la categoría que se ajuste a su situación, haga clic en el enlace provisto para obtener información sobre los requisitos de elegibilidad, cómo presentar su solicitud, y saber si sus familiares también pueden solicitar con usted.</p>"
+            },
+
+            "residencia-6": {
+                cat: "Residencia Permanente",
+                tit: "Cómo Solicitar la <br> <span class='text-teal'>Tarjeta de Residente Permanente</span>",
+                cuerpo: "<p>Antes de comenzar el proceso de solicitud, debe contestar dos preguntas:<br></p><p><strong>1. ¿Es elegible para presentar una solicitud?</strong><br>Las leyes de Inmigración de Estados Unidos proporcionan una variedad de maneras para que las personas soliciten una tarjeta de residente permanente. Los requisitos de elegibilidad podrían variar según la categoría de inmigrante bajo la que presentará la solicitud. Consulte nuestra página Categorías de Elegibilidad de Tarjeta de Residente Permanente para ver todas las categorías posibles bajo las cuales usted puede presentar una solicitud y cuáles son los requisitos de elegibilidad.<br></p><p><strong>Estar Patrocinado para Obtener una Tarjeta de Residente Permanente</strong><br>La mayoría de las personas que solicitan una tarjeta de residente permanente deberán completar al menos dos formularios – una petición de inmigrante y la solicitud de tarjeta de residente permanente (Formulario I-485). Usualmente, alguien más deberá presentar la petición en nombre suyo, aunque puede que usted sea elegible para autopeticionar en algunos casos. A continuación, encontrará algunos de los formularios más comunes:<br></p><ul><li>• Formulario I-130, Petición de Familiar Extranjero</li><li>• Formulario I-140, Petición de Inmigrante para Trabajador Extranjero</li><li>• Formulario I-730, Petición de Familiar de Refugiado/Asilado</li><li>• Formulario I-589, Solicitud de Asilo o Suspensión de Remoción<br></li></ul><p>Otras peticiones incluyen:<br></p><ul><li>• Formulario I-360, Petición de Amerasiático, Viudo(a), o Inmigrante Especial</li><li>• Formulario I-526, Petición de Inmigrante por Empresario Extranjero</li><li>• Formulario I-918, Petición de Estatus de No Inmigrante U</li><li>• Formulario I-929, Petición de Familiar Cualificado de un No Inmigrante U-1<br></li></ul><p><strong>2. ¿Está dentro o fuera de Estados Unidos?</strong><br>Si es elegible para solicitar una tarjeta de residente permanente, entonces deberá determinar qué proceso utilizará: ajuste de estatus o trámite consular.<br></p><p><strong>Proceso General de Solicitud</strong><br>Aquí le mostramos el proceso de solicitud general por el que pasa la mayoría de los solicitantes:<br></p><ul><li>• Usualmente, alguien presenta una petición de inmigrante en nombre suyo.</li><li>• Después de que USCIS apruebe su petición, y si existe una visa disponible, usted presentará la solicitud de tarjeta de residente permanente (I-485) o solicitud de visa con el Departamento de Estado.</li><li>• Comparece a la cita de toma de datos biométricos.</li><li>• Comparece a la entrevista.</li><li>• Recibe la decisión sobre su solicitud.</li></ul>"
+            },
+
+            "residencia-7": {
+                cat: "Residencia Permanente",
+                tit: "Si su solicitud de Residente Permanente <br> <span class='text-teal'>está en Trámite con USCIS</span>",
+                cuerpo: "<p>Si ya usted presentó un Formulario I-485 y su caso está en trámite, vaya a la página correspondiente para obtener más información sobre cómo verificar su estatus, actualizar su dirección y hacer citas.<br></p><p><strong>Cómo Rastrear el Envío de su Tarjeta de Residente Permanente, Documento de Autorización de Empleo y Documento de Viaje</strong><br></p><ul><li>• Cree una cuenta de Estatus de Caso En Línea para obtener actualizaciones automáticas y el número de rastreo de USPS.</li><li>• Inscríbase en Informed Delivery de USPS para recibir imágenes diarias de su correspondencia.</li></ul><p>Si su información de seguimiento muestra que su paquete fue entregado pero no lo ha recibido, comuníquese con su oficina de correos local de inmediato. Si su dirección postal cambia después de presentar su solicitud, debe actualizar su dirección con USCIS y con USPS lo antes posible.<br></p><p><strong>Si ya Tiene su Tarjeta de Residente Permanente</strong><br>Si ya tiene una tarjeta de residente permanente, visite nuestra sección de información sobre viajes, renovación y sus derechos y responsabilidades como residente permanente.</p>"
+            },
+            "leyes-1": {
+                cat: "Leyes",
+                tit: "Legislación <br> <span class='text-teal'>Federal</span>",
+                cuerpo: "<p>La Constitución de Estados Unidos confiere todos los poderes legislativos federales al Congreso de Estados Unidos. El Congreso ejerce su poder mediante la promulgación de leyes públicas y privadas. Una ley pública estadounidense es una ley federal que tiene aplicabilidad general en toda la nación. Cuando el Congreso promulga una ley pública, por lo general, no reescribe toda la ley, sino que le agrega o cambia palabras específicas de una sección. Este conjunto más amplio de ley es codificado por temas en el <strong>Código de Estados Unidos (U.S.C.)</strong>.<br></p><p><strong>Legislación que Afecta la Inmigración y Nacionalidad</strong><br>La ley conocida como la <strong>Ley de Inmigración y Nacionalidad de 1952 (INA)</strong> recopiló muchas de las disposiciones existentes y reorganizó la estructura de la ley de inmigración. Puede encontrar la INA y la mayoría de las demás leyes de inmigración en la parte del Código de Estados Unidos llamado el <strong>Título 8</strong>.<br></p><ul><li>• Ley de Inmigración y Nacionalidad</li><li>• Leyes Públicas</li></ul><p><strong>Legislación que Afecta las Operaciones de la Agencia</strong><br>El Congreso ha promulgado leyes que rigen cómo las agencias ejecutivas realizan negocios. Las siguientes son algunas de las leyes que aplican a USCIS:<br></p><ul><li>• Ley de Justicia Regulatoria para Pequeñas Empresas (SBREFA)</li><li>• Ley de Libertad de Información y Ley de Privacidad</li><li>• Ley de Reducción de Papeleo</li></ul>"
+            },
+
+            "leyes-2": {
+                cat: "Leyes",
+                tit: "Presencia Ilegal <br> <span class='text-teal'>e Inadmisibilidad</span>",
+                cuerpo: "<p>La presencia ilegal es cualquier periodo en el que usted está en Estados Unidos sin ser admitido o haber recibido permiso de permanencia temporal (“parole”), o cuando expira su estadía autorizada. A menos que le aplique una excepción, usted será declarado inadmisible si:<br></p><ul><li>• Solicita admisión nuevamente durante el periodo de los <strong>3 años</strong> posteriores a salir de EE.UU. (si acumuló más de 180 días pero menos de un año de presencia ilegal).</li><li>• Solicita la admisión nuevamente dentro de los <strong>10 años</strong> posteriores a salir o ser removido (si acumuló un año o más de presencia ilegal).</li><li>• Reingresa o intenta reingresar sin admisión tras haber acumulado más de un año de presencia ilegal total.</li></ul><p>Estas causales se encuentran en las secciones 212(a)(9)(B)(i) y 212(a)(9)(C)(i)(I) de la INA. <strong>Nota:</strong> Determinar la inadmisibilidad puede ser complicado; se recomienda asesoría legal autorizada.</p>"
+            },
+
+            "leyes-3": {
+                cat: "Leyes",
+                tit: "Reglamentos <br> <span class='text-teal'>(CFR)</span>",
+                cuerpo: "<p>Las leyes del Congreso son implementadas por reglamentos emitidos por agencias del Poder Ejecutivo. Estos se publican en el <strong>Código de Reglamentos Federales (CFR)</strong>.<br></p><p>El <strong>Título 8 del CFR</strong> se refiere a 'Extranjeros y Nacionalidad'. Otras agencias también tienen reglamentos que afectan la inmigración en sus áreas de responsabilidad:<br></p><ul><li>• Título 6: Seguridad Nacional</li><li>• Título 7: Agricultura</li><li>• Título 20: Beneficios de los Empleados</li><li>• Título 22: Relaciones Exteriores</li><li>• Título 28: Administración Judicial</li><li>• Título 29: Trabajo</li><li>• Título 42: Salud Pública</li></ul><p><em>Tenga en cuenta que algunas disposiciones del Título 8 del CFR pueden estar canceladas preliminarmente o no estar vigentes actualmente.</em></p>"
+            },
+
+            "leyes-4": {
+                cat: "Leyes",
+                tit: "Apelaciones <br> <span class='text-teal'>Administrativas</span>",
+                cuerpo: "<p>La <strong>Oficina de Apelaciones Administrativas (AAO)</strong> lleva a cabo revisiones de las decisiones de USCIS relacionadas con peticiones de beneficios de inmigración. El objetivo es promover la consistencia y precisión de las leyes y políticas. La AAO tiene jurisdicción sobre apelaciones en más de <strong>cincuenta tipos diferentes</strong> de solicitudes y peticiones.</p>"
+            },
+            // CONTINUAR CON LOS DEMÁS...
+        };
+
+        // Lógica para cargar el contenido automáticamente
+    document.addEventListener('DOMContentLoaded', () => {
+        // Obtenemos el ID desde la URL (Flask nos lo pone fácil)
+        const pathArray = window.location.pathname.split('/');
+        const id = pathArray[pathArray.length - 1];
+
+        const info = dataLegal[id];
+
+        if (info) {
+            document.getElementById('txt-categoria').innerText = info.cat;
+            document.getElementById('txt-titulo').innerHTML = info.tit;
+            document.getElementById('txt-contenido').innerHTML = info.cuerpo;
+        } else {
+            document.getElementById('txt-titulo').innerText = "Servicio no encontrado";
+        }
+    });
+
+        // 3. LÓGICA DE MENÚS (Igual que el index)
+        const menuButtons = document.querySelectorAll('[data-menu]');
+        const megaMenus = document.querySelectorAll('.mega-menu');
+
+        menuButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const menuId = btn.getAttribute('data-menu');
+                const targetMenu = document.getElementById(menuId);
+                const isActive = targetMenu.classList.contains('active');
+                
+                megaMenus.forEach(m => m.classList.remove('active'));
+                if (!isActive) targetMenu.classList.add('active');
+            });
+        });
+
+        document.addEventListener('click', () => megaMenus.forEach(m => m.classList.remove('active')));
+
+        window.onload = () => {
+            AOS.init();
+            cargarContenido();
+        };
+    </script>
+</body>
+</html>
